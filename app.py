@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify
 import urllib.parse
 
-app = Flask(__name__, template_folder='templaste')
+app = Flask(__name__)
 
 # Официальный номер для бронирования
 WHATSAPP_NUMBER = "996700656524"
