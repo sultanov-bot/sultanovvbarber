@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SULTANOV BARBER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0c0c0c;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        /* Главный экран — строго по центру */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.9)), 
+                        url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .brand-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 900;
+            text-align: center;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 15px 0 30px 0;
+            font-style: italic;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37, #aa820a);
+            color: #0c0c0c;
+            padding: 14px 32px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s ease;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Мотивационные цитаты */
+        .motivation-section {
+            padding: 70px 20px;
+            background: #111111;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .motivation-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .motivation-card {
+            background: #161616;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 3px solid #d4af37;
+            text-align: left;
+        }
+
+        .motivation-card p {
+            color: #ddd;
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        /* Брендовая цитата */
+        .quote-section {
+            padding: 70px 20px;
+            background: #0f0f0f;
+            text-align: center;
+        }
+
+        .quote-section blockquote {
+            font-size: 1.6rem;
+            color: #d4af37;
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .quote-section span {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Цены */
+        .prices {
+            padding: 90px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #d4af37;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .price-card {
+            background: #161616;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #262626;
+            transition: 0.3s;
+        }
+
+        .price-card:hover {
+            border-color: #d4af37;
+            transform: translateY(-5px);
+        }
+
+        .price-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .price-card .cost {
+            font-size: 1.7rem;
+            color: #d4af37;
+            font-weight: 700;
+        }
+
+        /* Бронирование */
+        .booking-section {
+            padding: 90px 20px;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .booking-form {
+            background: #181818;
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid #2c2c2c;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #d4af37;
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #080808;
+            border-top: 1px solid #1a1a1a;
+            color: #888;
+        }
+
+        .gis-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid #d4af37;
+            padding: 10px 25px;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+
+        .gis-link:hover {
+            background: #d4af37;
+            color: #0c0c0c;
+        }
+
+        :root {
+            color-scheme: dark;
+            --gold: #d4af37;
+            --muted: #a7a29a;
+            --surface: #151513;
+            --line: rgba(212, 175, 55, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 24px;
+        }
+
+        body {
+            background: #0b0b0a;
+            color: #f5f2eb;
+            line-height: 1.6;
+        }
+
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 4px;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 92vh;
+            padding: 24px clamp(20px, 7vw, 100px) 90px;
+            background:
+                linear-gradient(90deg, rgba(7, 7, 6, .96) 0%, rgba(7, 7, 6, .72) 55%, rgba(7, 7, 6, .35) 100%),
+                linear-gradient(0deg, #0b0b0a 0%, transparent 35%),
+                url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1920&auto=format&fit=crop') center 42% / cover;
+            align-items: stretch;
+            text-align: left;
+        }
+
+        .site-header {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .brand-container {
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 10px;
+            margin: 0;
+            text-decoration: none;
+        }
+
+        .brand-crown {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            animation: crown-float 5s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .brand-name {
+            color: #f5f2eb;
+            font-size: .95rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(18px, 3vw, 38px);
+        }
+
+        .site-nav a {
+            color: #e1ded6;
+            text-decoration: none;
+            font-size: .82rem;
+            transition: color .2s ease;
+        }
+
+        .site-nav a:hover {
+            color: var(--gold);
+        }
+
+        .site-nav .nav-cta {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 9px 16px;
+            color: var(--gold);
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1240px;
+            margin: auto;
+            padding: 110px 0 55px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gold);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            width: 28px;
+            height: 1px;
+            background: var(--gold);
+            content: "";
+        }
+
+        .hero h1 {
+            max-width: 760px;
+            margin-top: 20px;
+            color: #f5f2eb;
+            font-size: clamp(2.7rem, 7vw, 6.2rem);
+            line-height: 1.04;
+            letter-spacing: -2px;
+            text-align: left;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            max-width: 520px;
+            margin: 22px 0 32px;
+            color: #d0ccc4;
+            font-size: 1rem;
+            font-style: normal;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50px;
+            border-radius: 6px;
+            background: var(--gold);
+            box-shadow: none;
+            padding: 14px 25px;
+        }
+
+        .btn-gold:hover {
+            background: #e5c45b;
+            box-shadow: 0 8px 24px rgba(212, 175, 55, .2);
+        }
+
+        .hero-note {
+            color: #c2bdb3;
+            font-size: .85rem;
+        }
+
+        .motivation-section {
+            padding: 64px 20px;
+            background: #10100e;
+            border-bottom: 1px solid #24231f;
+        }
+
+        .section-heading {
+            margin: 0 auto 32px;
+            max-width: 740px;
+            text-align: center;
+        }
+
+        .section-heading .eyebrow {
+            justify-content: center;
+        }
+
+        .section-heading h2 {
+            margin-top: 12px;
+            color: #f5f2eb;
+            font-size: clamp(1.7rem, 4vw, 2.5rem);
+            line-height: 1.2;
+        }
+
+        .section-heading p {
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        .motivation-grid {
+            max-width: 1120px;
+            gap: 16px;
+        }
+
+        .motivation-card {
+            min-height: 150px;
+            padding: 25px;
+            background: var(--surface);
+            border: 1px solid #282722;
+            border-left: 2px solid var(--gold);
+            border-radius: 6px;
+        }
+
+        .motivation-card p {
+            font-size: .96rem;
+            line-height: 1.75;
+        }
+
+        .quote-section {
+            padding: 76px 20px;
+            background: #0b0b0a;
+        }
+
+        .quote-section blockquote {
+            font-size: clamp(1.4rem, 3.5vw, 2.25rem);
+        }
+
+        .prices {
+            max-width: 1240px;
+            padding: 82px 24px;
+        }
+
+        .section-title {
+            margin-bottom: 36px;
+            color: #f5f2eb;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            letter-spacing: 1px;
+        }
+
+        .price-grid {
+            gap: 14px;
+        }
+
+        .price-card {
+            min-height: 130px;
+            padding: 24px;
+            background: linear-gradient(145deg, #171714, #11110f);
+            border: 1px solid #292821;
+            border-radius: 6px;
+        }
+
+        .price-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .price-card h3 {
+            margin-bottom: 12px;
+            color: #ddd9d0;
+            font-size: .95rem;
+        }
+
+        .price-card .cost {
+            font-size: 1.5rem;
+        }
+
+        .booking-section {
+            padding: 82px 20px;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, .08), transparent 60%),
+                #10100e;
+        }
+
+        .booking-form {
+            padding: clamp(24px, 5vw, 46px);
+            background: #171714;
+            border: 1px solid #302e25;
+            border-radius: 8px;
+            box-shadow: 0 18px 55px rgba(0, 0, 0, .35);
+        }
+
+        .booking-form .section-title {
+            margin-bottom: 8px !important;
+        }
+
+        .booking-intro {
+            margin-bottom: 28px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .form-group label {
+            color: #d3cfc6;
+            font-size: .76rem;
+            letter-spacing: .7px;
+        }
+
+        .form-group input, .form-group select {
+            min-height: 50px;
+            background: #0e0e0c;
+            border: 1px solid #35342d;
+            border-radius: 5px;
+            font: inherit;
+            font-size: .94rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--gold);
+        }
+
+        .submit-btn {
+            margin-top: 4px;
+        }
+
+        footer {
+            padding: 42px 20px;
+            background: #080807;
+            border-top: 1px solid #24231f;
+        }
+
+        footer p {
+            line-height: 1.8;
+        }
+
+        .gis-link {
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 700px) {
+            .hero {
+                min-height: 85vh;
+                padding: 18px 20px 56px;
+                background-position: 60% center;
+            }
+
+            .site-header {
+                align-items: flex-start;
+            }
+
+            .site-nav {
+                justify-content: flex-end;
+                flex-wrap: wrap;
+                gap: 8px 14px;
+            }
+
+            .site-nav a {
+                font-size: .72rem;
+            }
+
+            .site-nav .nav-cta {
+                padding: 6px 10px;
+            }
+
+            .brand-crown {
+                width: 30px;
+                height: 30px;
+            }
+
+            .brand-name {
+                font-size: .72rem;
+                letter-spacing: 1px;
+            }
+
+            .hero-content {
+                padding: 105px 0 30px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .motivation-grid, .price-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prices {
+                padding: 64px 20px;
+            }
+
+            .approach-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-inner {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .tool-showcase {
+                padding: 58px 20px;
+            }
+
+            .site-footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-actions {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .site-header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .site-nav {
+                justify-content: center;
+            }
+
+            .hero-content {
+                padding-top: 75px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
+        .approach-grid {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .approach-card {
+            padding: 26px;
+            background: linear-gradient(145deg, #171714, #11110f);
+            border: 1px solid #292821;
+            border-radius: 6px;
+        }
+
+        .approach-number {
+            display: block;
+            margin-bottom: 22px;
+            color: var(--gold);
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .approach-card h3 {
+            margin-bottom: 9px;
+            color: #f5f2eb;
+            font-size: 1rem;
+        }
+
+        .approach-card p {
+            color: var(--muted);
+            font-size: .9rem;
+            line-height: 1.7;
+        }
+
+        .tool-showcase {
+            padding: 78px 24px;
+            background: #0b0b0a;
+            border-top: 1px solid #24231f;
+            border-bottom: 1px solid #24231f;
+        }
+
+        .tool-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+            align-items: center;
+            gap: clamp(28px, 6vw, 72px);
+        }
+
+        .tool-image {
+            display: block;
+            width: 100%;
+            border: 1px solid #292821;
+            border-radius: 6px;
+            background: #050505;
+        }
+
+        .tool-copy .eyebrow {
+            margin-bottom: 14px;
+        }
+
+        .tool-copy h2 {
+            margin-bottom: 14px;
+            color: #f5f2eb;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            line-height: 1.2;
+        }
+
+        .tool-copy p {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .tool-tag {
+            display: inline-block;
+            margin-top: 22px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 8px 13px;
+            color: var(--gold);
+            font-size: .76rem;
+            letter-spacing: .5px;
+            animation: tag-float 6s ease-in-out infinite;
+        }
+
+        .price-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .price-card h3 {
+            min-height: 2.8em;
+        }
+
+        .price-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: auto;
+            padding-top: 17px;
+            color: var(--gold);
+            font-size: .78rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .price-action::after {
+            content: "→";
+            transition: transform .2s ease;
+        }
+
+        .price-action:hover::after {
+            transform: translateX(4px);
+        }
+
+        .site-footer {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 24px;
+            max-width: 1120px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .footer-brand {
+            margin-bottom: 7px;
+            color: #f5f2eb;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .footer-details {
+            color: var(--muted);
+            font-size: .86rem;
+        }
+
+        .footer-actions {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .footer-actions a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 42px;
+            margin: 0;
+            padding: 9px 16px;
+            border: 1px solid #35342d;
+            border-radius: 5px;
+            color: #e3dfd6;
+            font-size: .8rem;
+            text-decoration: none;
+            transition: border-color .2s ease, color .2s ease;
+        }
+
+        .footer-actions a:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .footer-actions .gis-link {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .copyright {
+            max-width: 1120px;
+            margin: 25px auto 0;
+            padding-top: 18px;
+            border-top: 1px solid #24231f;
+            color: #77746d;
+            font-size: .76rem;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            z-index: 1;
+            bottom: 26px;
+            left: 50%;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            color: #c2bdb3;
+            font-size: .66rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transform: translateX(-50%);
+        }
+
+        .scroll-cue::after {
+            width: 8px;
+            height: 8px;
+            border-right: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+            content: "";
+            animation: arrow-drift 1.8s ease-in-out infinite;
+        }
+
+        .hero {
+            isolation: isolate;
+            overflow: hidden;
+            background: #0b0b0a;
+        }
+
+        .hero::before {
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(7, 7, 6, .96) 0%, rgba(7, 7, 6, .72) 55%, rgba(7, 7, 6, .35) 100%),
+                linear-gradient(0deg, #0b0b0a 0%, transparent 35%),
+                url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1920&auto=format&fit=crop') center 42% / cover;
+            content: "";
+            animation: hero-drift 28s ease-in-out infinite alternate;
+        }
+
+        .site-header, .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1240px;
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            font-size: clamp(2.55rem, 6.1vw, 5.5rem);
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 span {
+            white-space: nowrap;
+        }
+
+        .hero-quote {
+            max-width: 590px;
+            margin-top: 20px;
+            color: var(--gold);
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(1.05rem, 2vw, 1.35rem);
+            font-style: italic;
+            line-height: 1.55;
+        }
+
+        .hero-quote cite {
+            display: block;
+            margin-top: 7px;
+            color: #c2bdb3;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .68rem;
+            font-style: normal;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-content > * {
+            animation: hero-enter .75s cubic-bezier(.2, .7, .2, 1) both;
+        }
+
+        .hero-content > :nth-child(1) { animation-delay: .12s; }
+        .hero-content > :nth-child(2) { animation-delay: .24s; }
+        .hero-content > :nth-child(3) { animation-delay: .36s; }
+        .hero-content > :nth-child(4) { animation-delay: .48s; }
+
+        .btn-gold {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            transition: transform .25s ease, background-color .25s ease, box-shadow .25s ease;
+        }
+
+        .btn-gold::after {
+            position: absolute;
+            z-index: -1;
+            top: -50%;
+            left: -45%;
+            width: 30%;
+            height: 200%;
+            background: rgba(255, 255, 255, .28);
+            content: "";
+            transform: skewX(-22deg);
+            transition: left .55s ease;
+        }
+
+        .btn-gold:hover::after {
+            left: 125%;
+        }
+
+        .approach-card, .price-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform .35s cubic-bezier(.2, .7, .2, 1), border-color .35s ease, background-color .35s ease, box-shadow .35s ease;
+        }
+
+        .approach-card::before, .price-card::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            content: "";
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s ease;
+        }
+
+        .approach-card:hover, .price-card:hover {
+            border-color: rgba(212, 175, 55, .65);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, .22);
+            transform: translateY(-5px);
+        }
+
+        .approach-card:hover::before, .price-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tool-image {
+            transition: transform .7s cubic-bezier(.2, .7, .2, 1), border-color .4s ease;
+        }
+
+        .tool-image:hover {
+            border-color: rgba(212, 175, 55, .55);
+            transform: scale(1.015);
+        }
+
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .has-reveal .reveal:not(.is-visible) {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+
+        .has-reveal .reveal {
+            transition: opacity .7s ease var(--reveal-delay, 0ms), transform .7s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0ms);
+        }
+
+        @keyframes hero-enter {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes hero-drift {
+            from { transform: scale(1.02); }
+            to { transform: scale(1.08) translateX(-.5%); }
+        }
+
+        @keyframes crown-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @keyframes arrow-drift {
+            0%, 100% { transform: translateY(-2px) rotate(45deg); }
+            50% { transform: translateY(4px) rotate(45deg); }
+        }
+
+        @keyframes tag-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 {
+                font-size: clamp(2.25rem, 9vw, 3.8rem);
+                letter-spacing: -1px;
+            }
+
+            .hero h1 span {
+                white-space: normal;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero::before, .hero-content > *, .btn-gold::after, .brand-crown, .scroll-cue::after, .tool-tag {
+                animation: none !important;
+            }
+
+            .has-reveal .reveal:not(.is-visible) {
+                opacity: 1;
+                transform: none;
+            }
+
+            .has-reveal .reveal, .approach-card, .price-card, .tool-image, .btn-gold {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Главный экран -->
+    <section class="hero">
+        <header class="site-header">
+            <a class="brand-container" href="#top" aria-label="Sultanov Barber — главная">
+                <img src="{{ url_for('static', filename='crown.png') }}" alt="" class="brand-crown">
+                <span class="brand-name">SULTANOV BARBER</span>
+            </a>
+            <nav class="site-nav" aria-label="Основная навигация">
+                <a href="#services">Услуги</a>
+                <a href="#about">О нас</a>
+                <a href="#contacts">Контакты</a>
+                <a class="nav-cta" href="#booking">Записаться</a>
+            </nav>
+        </header>
+        <div class="hero-content" id="top">
+            <span class="eyebrow">SULTANOV · БИШКЕК</span>
+            <h1>Твой стиль.<br><span>Твои правила.</span></h1>
+            <blockquote class="hero-quote">
+                «Стиль — это способ сказать, кто ты есть, не произнося ни слова.»
+                <cite>SULTANOV BARBER</cite>
+            </blockquote>
+            <p>Точная стрижка и аккуратная борода — под твой запрос, без лишней суеты. Выбери услугу и удобное время: заявку подтвердим в WhatsApp.</p>
+            <div class="hero-actions">
+                <a href="#booking" class="btn-gold">Выбрать время и записаться</a>
+                <span class="hero-note">Каждый день · 10:00–21:00</span>
+            </div>
+        </div>
+        <a class="scroll-cue" href="#about" aria-label="Прокрутить к разделу о нашем подходе">Листайте ниже</a>
+    </section>
+
+    <!-- Наш подход -->
+    <section class="motivation-section" id="about">
+        <div class="section-heading">
+            <span class="eyebrow">Наш подход</span>
+            <h2>Хорошая стрижка — это внимание к деталям</h2>
+            <p>Сначала поймём, что тебе нужно. Затем выберем услугу и согласуем удобное время.</p>
+        </div>
+        <div class="approach-grid">
+            <article class="approach-card">
+                <span class="approach-number">01 / ОБРАЗ</span>
+                <h3>Твой запрос — в центре</h3>
+                <p>Расскажи, какой результат хочешь получить. Обсудим форму и длину до начала работы.</p>
+            </article>
+            <article class="approach-card">
+                <span class="approach-number">02 / ДЕТАЛИ</span>
+                <h3>Аккуратность в деталях</h3>
+                <p>Стрижка, контуры и оформление бороды — выбери нужную услугу в прайсе ниже.</p>
+            </article>
+            <article class="approach-card">
+                <span class="approach-number">03 / ЗАПИСЬ</span>
+                <h3>Удобное время</h3>
+                <p>Оставь заявку онлайн. Мы свяжемся с тобой в WhatsApp, чтобы подтвердить запись.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="tool-showcase" aria-labelledby="tool-title">
+        <div class="tool-inner">
+            <img class="tool-image" src="{{ url_for('static', filename='magic_clip.jpg') }}" alt="Машинка Wahl Magic Clip Cordless, вид со всех сторон" loading="lazy">
+            <div class="tool-copy">
+                <span class="eyebrow">Инструмент мастера</span>
+                <h2 id="tool-title">Точность в каждом движении</h2>
+                <p>Для стрижек используем машинку Wahl Magic Clip Cordless. Хороший результат начинается с точной формы и внимания к деталям.</p>
+                <span class="tool-tag">WAHL · MAGIC CLIP CORDLESS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Цены -->
+    <section class="prices" id="services">
+        <div class="section-heading">
+            <span class="eyebrow">Прайс</span>
+            <h2>Услуги и стоимость</h2>
+            <p>Выбери услугу и оставь заявку — мы подтвердим удобное время.</p>
+        </div>
+        <div class="price-grid">
+            <div class="price-card">
+                <h3>Стрижка</h3>
+                <div class="cost">800 сом</div>
+                <a class="price-action" href="#booking" data-service="Стрижка - 800 сом">Выбрать услугу</a>
+            </div>
+            <div class="price-card">
+                <h3>Моделирование бороды</h3>
+                <div class="cost">700 сом</div>
+                <a class="price-action" href="#booking" data-service="Моделирование бороды - 700 сом">Выбрать услугу</a>
+            </div>
+            <div class="price-card">
+                <h3>Детская стрижка</h3>
+                <div class="cost">600 сом</div>
+                <a class="price-action" href="#booking" data-service="Детская стрижка - 600 сом">Выбрать услугу</a>
+            </div>
+            <div class="price-card">
+                <h3>Стрижка + борода</h3>
+                <div class="cost">1300 сом</div>
+                <a class="price-action" href="#booking" data-service="Стрижка + борода - 1300 сом">Выбрать услугу</a>
+            </div>
+            <div class="price-card">
+                <h3>Коррекция бороды</h3>
+                <div class="cost">500 сом</div>
+                <a class="price-action" href="#booking" data-service="Коррекция бороды - 500 сом">Выбрать услугу</a>
+            </div>
+            <div class="price-card">
+                <h3>Чистка лица</h3>
+                <div class="cost">800 сом</div>
+                <a class="price-action" href="#booking" data-service="Чистка лица - 800 сом">Выбрать услугу</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Бронирование -->
+    <section class="booking-section" id="booking">
+        <form class="booking-form" action="/book" method="POST">
+            <h2 class="section-title">Запись онлайн</h2>
+            <p class="booking-intro">Оставь заявку — откроется WhatsApp, и мы подтвердим выбранное время. Никакой оплаты на сайте.</p>
+            
+            <div class="form-group">
+                <label for="booking-name">Ваше имя</label>
+                <input id="booking-name" type="text" name="name" autocomplete="name" required placeholder="Например, Азамат">
+            </div>
+
+            <div class="form-group">
+                <label for="booking-phone">Номер телефона</label>
+                <input id="booking-phone" type="tel" name="phone" autocomplete="tel" required placeholder="+996 (___) __-__-__">
+            </div>
+
+            <div class="form-group">
+                <label for="booking-service">Выберите услугу</label>
+                <select id="booking-service" name="service" required>
+                    <option value="" disabled selected>Выберите услугу</option>
+                    <option value="Стрижка - 800 сом">Стрижка — 800 сом</option>
+                    <option value="Моделирование бороды - 700 сом">Моделирование бороды — 700 сом</option>
+                    <option value="Детская стрижка - 600 сом">Детская стрижка — 600 сом</option>
+                    <option value="Стрижка + борода - 1300 сом">Стрижка + борода — 1300 сом</option>
+                    <option value="Коррекция бороды - 500 сом">Коррекция бороды — 500 сом</option>
+                    <option value="Чистка лица - 800 сом">Чистка лица — 800 сом</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="booking-date">Дата визита</label>
+                <input id="booking-date" type="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="booking-time">Время визита (10:00–21:00)</label>
+                <select id="booking-time" name="time" required>
+                    <option value="" disabled selected>Выберите время</option>
+                    <option>10:00</option><option>10:30</option>
+                    <option>11:00</option><option>11:30</option>
+                    <option>12:00</option><option>12:30</option>
+                    <option>13:00</option><option>13:30</option>
+                    <option>14:00</option><option>14:30</option>
+                    <option>15:00</option><option>15:30</option>
+                    <option>16:00</option><option>16:30</option>
+                    <option>17:00</option><option>17:30</option>
+                    <option>18:00</option><option>18:30</option>
+                    <option>19:00</option><option>19:30</option>
+                    <option>20:00</option><option>20:30</option>
+                    <option>21:00</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-gold submit-btn">Записаться в WhatsApp</button>
+        </form>
+    </section>
+
+    <!-- Футер -->
+    <footer id="contacts">
+        <div class="site-footer">
+            <div>
+                <p class="footer-brand">SULTANOV BARBER</p>
+                <p class="footer-details">Trigger Barbershop · Бишкек<br>Ежедневно, 10:00–21:00</p>
+            </div>
+            <div class="footer-actions">
+                <a href="https://wa.me/996700656524" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
+                <a href="https://2gis.kg/bishkek/geo/70000001104046164" target="_blank" rel="noopener noreferrer" class="gis-link">Открыть в 2ГИС</a>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2026 SULTANOV BARBER. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const dateInput = document.getElementById('booking-date');
+        const today = new Date();
+        const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+            .toISOString()
+            .slice(0, 10);
+        dateInput.min = localToday;
+
+        const serviceSelect = document.getElementById('booking-service');
+        document.querySelectorAll('[data-service]').forEach((link) => {
+            link.addEventListener('click', () => {
+                serviceSelect.value = link.dataset.service;
+            });
+        });
+
+        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const revealItems = document.querySelectorAll(
+                '.section-heading, .approach-card, .tool-inner, .price-card, .booking-form'
+            );
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            revealItems.forEach((item, index) => {
+                item.classList.add('reveal');
+                item.style.setProperty('--reveal-delay', `${(index % 3) * 90}ms`);
+                revealObserver.observe(item);
+            });
+            document.documentElement.classList.add('has-reveal');
+        }
+    </script>
+</body>
+</html>
