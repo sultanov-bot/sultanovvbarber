@@ -6,3 +6,8 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
     healthCheckPath: /
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: WHATSAPP_NUMBER
+        value: "996700656524"
