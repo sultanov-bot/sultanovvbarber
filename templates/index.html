@@ -758,6 +758,23 @@
             line-height: 1.8;
         }
 
+        @media (max-width: 700px) {
+            .tool-inner,
+            .tool-copy {
+                min-width: 0;
+                width: 100%;
+            }
+
+            .tool-inner {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 28px;
+            }
+
+            .tool-showcase {
+                padding: 58px 20px;
+            }
+        }
+
         .tool-tag {
             display: inline-block;
             margin-top: 22px;
@@ -1090,6 +1107,153 @@
                 transition: none !important;
             }
         }
+
+        .booking-form {
+            min-width: 0;
+        }
+
+        .booking-form .form-group input,
+        .booking-form .form-group select {
+            min-width: 0;
+            scroll-margin-top: 20px;
+        }
+
+        .phone-hint,
+        .slot-feedback {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: .82rem;
+            line-height: 1.5;
+        }
+
+        .slot-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            margin: 0 0 12px;
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .slot-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .slot-legend i {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            background: var(--gold);
+        }
+
+        .slot-legend .legend-occupied {
+            background: #a52b32;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 9px;
+        }
+
+        .time-slot {
+            min-width: 0;
+            min-height: 48px;
+            padding: 10px 6px;
+            border: 1px solid #39372f;
+            border-radius: 5px;
+            background: #10100e;
+            color: #f5f2eb;
+            font: inherit;
+            font-size: .9rem;
+            cursor: pointer;
+            transition: border-color .2s ease, background .2s ease, color .2s ease;
+        }
+
+        .time-slot:hover:not(:disabled),
+        .time-slot.is-selected {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, .14);
+        }
+
+        .time-slot.is-selected {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .time-slot:disabled {
+            border-color: #64242a;
+            background: #421b20;
+            color: #ffb4b8;
+            cursor: not-allowed;
+            text-decoration: line-through;
+            opacity: 1;
+        }
+
+        .time-slot:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 700px) {
+            .booking-section {
+                padding: 54px 14px;
+            }
+
+            .booking-form {
+                width: 100%;
+                padding: 24px 18px;
+            }
+
+            .booking-form .section-title {
+                font-size: clamp(1.55rem, 7vw, 2rem);
+            }
+
+            .booking-intro {
+                margin-bottom: 22px;
+                font-size: .9rem;
+            }
+
+            .form-group {
+                margin-bottom: 17px;
+            }
+
+            .booking-form .form-group input,
+            .booking-form .form-group select {
+                min-height: 52px;
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .time-slot {
+                min-height: 50px;
+                font-size: .86rem;
+            }
+
+            .submit-btn {
+                min-height: 54px;
+                padding-inline: 14px;
+                font-size: .84rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .booking-form {
+                padding-inline: 14px;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
     </style>
 </head>
 <body>
@@ -1207,7 +1371,7 @@
     <section class="booking-section" id="booking">
         <form class="booking-form" action="/book" method="POST">
             <h2 class="section-title">Запись онлайн</h2>
-            <p class="booking-intro">Оставь заявку — откроется WhatsApp, и мы подтвердим выбранное время. Никакой оплаты на сайте.</p>
+            <p class="booking-intro">Выберите свободное время и отправьте заявку в WhatsApp салона. Номер клиента будет включён в сообщение.</p>
             
             <div class="form-group">
                 <label for="booking-name">Ваше имя</label>
@@ -1216,7 +1380,8 @@
 
             <div class="form-group">
                 <label for="booking-phone">Номер телефона</label>
-                <input id="booking-phone" type="tel" name="phone" autocomplete="tel" required placeholder="+996 (___) __-__-__">
+                <input id="booking-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel" required placeholder="+996 700 123 456">
+                <small class="phone-hint">Номер клиента будет указан в заявке, которая откроется в WhatsApp салона.</small>
             </div>
 
             <div class="form-group">
@@ -1238,25 +1403,17 @@
             </div>
 
             <div class="form-group">
-                <label for="booking-time">Время визита (10:00–21:00)</label>
-                <select id="booking-time" name="time" required>
-                    <option value="" disabled selected>Выберите время</option>
-                    <option>10:00</option><option>10:30</option>
-                    <option>11:00</option><option>11:30</option>
-                    <option>12:00</option><option>12:30</option>
-                    <option>13:00</option><option>13:30</option>
-                    <option>14:00</option><option>14:30</option>
-                    <option>15:00</option><option>15:30</option>
-                    <option>16:00</option><option>16:30</option>
-                    <option>17:00</option><option>17:30</option>
-                    <option>18:00</option><option>18:30</option>
-                    <option>19:00</option><option>19:30</option>
-                    <option>20:00</option><option>20:30</option>
-                    <option>21:00</option>
-                </select>
+                <label>Время визита (10:00–21:00)</label>
+                <div class="slot-legend" aria-label="Обозначения доступности">
+                    <span><i></i> Свободно</span>
+                    <span><i class="legend-occupied"></i> Уже занято</span>
+                </div>
+                <div id="time-slots" class="time-slots" role="group" aria-label="Свободное время"></div>
+                <input id="booking-time" type="hidden" name="time">
+                <p id="slot-feedback" class="slot-feedback" role="status" aria-live="polite">Сначала выберите дату визита.</p>
             </div>
 
-            <button type="submit" class="btn-gold submit-btn">Записаться в WhatsApp</button>
+            <button type="submit" class="btn-gold submit-btn">Отправить заявку в WhatsApp</button>
         </form>
     </section>
 
@@ -1277,11 +1434,129 @@
 
     <script>
         const dateInput = document.getElementById('booking-date');
-        const today = new Date();
-        const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
-            .toISOString()
-            .slice(0, 10);
+        const dateParts = new Intl.DateTimeFormat('en', {
+            timeZone: 'Asia/Bishkek',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        }).formatToParts(new Date());
+        const datePart = (type) => dateParts.find((part) => part.type === type).value;
+        const localToday = `${datePart('year')}-${datePart('month')}-${datePart('day')}`;
         dateInput.min = localToday;
+
+        const bookingForm = document.querySelector('.booking-form');
+        const timeInput = document.getElementById('booking-time');
+        const timeSlots = document.getElementById('time-slots');
+        const slotFeedback = document.getElementById('slot-feedback');
+        const availableTimes = {{ times | tojson }};
+
+        function isTimeInThePast(slotTime) {
+            if (dateInput.value !== localToday) return false;
+            const [hours, minutes] = slotTime.split(':').map(Number);
+            const now = new Date();
+            const bishkekParts = new Intl.DateTimeFormat('en', {
+                timeZone: 'Asia/Bishkek',
+                hour: '2-digit',
+                minute: '2-digit',
+                hourCycle: 'h23'
+            }).formatToParts(now);
+            const currentPart = (type) => Number(
+                bishkekParts.find((part) => part.type === type).value
+            );
+            return hours * 60 + minutes <= currentPart('hour') * 60 + currentPart('minute');
+        }
+
+        function renderTimeSlots(bookedTimes) {
+            timeSlots.replaceChildren();
+            availableTimes.forEach((slotTime) => {
+                const button = document.createElement('button');
+                const occupied = bookedTimes.includes(slotTime);
+                const past = isTimeInThePast(slotTime);
+                button.type = 'button';
+                button.className = 'time-slot';
+                button.textContent = slotTime;
+                button.dataset.time = slotTime;
+                button.disabled = occupied || past;
+                if (occupied) {
+                    button.classList.add('is-occupied');
+                    button.setAttribute('aria-label', `${slotTime}, уже занято`);
+                    button.title = 'Это время уже занято';
+                } else if (past) {
+                    button.setAttribute('aria-label', `${slotTime}, время прошло`);
+                    button.title = 'Это время уже прошло';
+                }
+                if (timeInput.value === slotTime && !button.disabled) {
+                    button.classList.add('is-selected');
+                    button.setAttribute('aria-pressed', 'true');
+                } else {
+                    button.setAttribute('aria-pressed', 'false');
+                }
+                timeSlots.append(button);
+            });
+        }
+
+        async function loadBookedTimes() {
+            const selectedDate = dateInput.value;
+            timeInput.value = '';
+            renderTimeSlots([]);
+            if (!dateInput.value) {
+                slotFeedback.textContent = 'Сначала выберите дату визита.';
+                return;
+            }
+            if (dateInput.value < localToday) {
+                renderTimeSlots(availableTimes);
+                timeSlots.querySelectorAll('button').forEach((button) => {
+                    button.disabled = true;
+                });
+                slotFeedback.textContent = 'Прошедшие даты недоступны для записи.';
+                return;
+            }
+
+            slotFeedback.textContent = 'Загружаем свободное время…';
+            timeSlots.querySelectorAll('button').forEach((button) => {
+                button.disabled = true;
+            });
+            try {
+                const response = await fetch(
+                    `/get_booked?date=${encodeURIComponent(dateInput.value)}`
+                );
+                if (!response.ok) throw new Error(`Availability request failed: ${response.status}`);
+                const data = await response.json();
+                if (dateInput.value !== selectedDate) return;
+                renderTimeSlots(data.booked);
+                slotFeedback.textContent = data.booked.length
+                    ? 'Красным отмечено время, которое уже занято.'
+                    : 'Все показанное время пока свободно.';
+            } catch (error) {
+                if (dateInput.value !== selectedDate) return;
+                renderTimeSlots(availableTimes);
+                timeSlots.querySelectorAll('button').forEach((button) => {
+                    button.disabled = true;
+                });
+                slotFeedback.textContent = 'Не удалось загрузить расписание. Обновите страницу.';
+                console.error('Could not load booking availability.', error);
+            }
+        }
+
+        dateInput.addEventListener('change', loadBookedTimes);
+        timeSlots.addEventListener('click', (event) => {
+            const button = event.target.closest('button[data-time]');
+            if (!button || button.disabled) return;
+            timeInput.value = button.dataset.time;
+            timeSlots.querySelectorAll('button').forEach((slot) => {
+                const selected = slot === button;
+                slot.classList.toggle('is-selected', selected);
+                slot.setAttribute('aria-pressed', String(selected));
+            });
+            slotFeedback.textContent = `Выбрано время ${timeInput.value}.`;
+        });
+        bookingForm.addEventListener('submit', (event) => {
+            if (!timeInput.value) {
+                event.preventDefault();
+                slotFeedback.textContent = 'Выберите свободное время перед отправкой заявки.';
+                timeSlots.querySelector('button:not(:disabled)')?.focus();
+            }
+        });
 
         const serviceSelect = document.getElementById('booking-service');
         document.querySelectorAll('[data-service]').forEach((link) => {
